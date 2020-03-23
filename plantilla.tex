@@ -1,0 +1,178 @@
+\documentclass[
+  a4paper,
+  spanish,
+  12pt,
+]{scrartcl}
+
+\linespread{1.05}
+
+
+%-------------------------------------------------------------------------------
+%	PAQUETES
+%-------------------------------------------------------------------------------
+
+% Idioma
+
+\usepackage[es-noindentfirst, es-tabla]{babel}
+
+% Matemáticas
+
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage{mathtools}
+\usepackage{commath}
+\usepackage{xfrac}
+
+% Fuentes personalizadas para utilizar con XeLaTeX o LuaLaTeX
+
+\usepackage[no-math]{fontspec}
+\setmainfont[WordSpace=1.3, RawFeature={+ss06}  ]{EBGaramond}
+\setsansfont[Scale=0.9]{Alegreya Sans}
+\setmonofont[Scale=0.75]{Vera Mono}
+
+\usepackage[math-style=TeX]{unicode-math}
+\setmathfont{Garamond Math}[StylisticSet={3}]
+
+
+% Configuración de microtype
+
+\defaultfontfeatures{Ligatures=TeX,Numbers=Lining}
+\usepackage[activate={true,nocompatibility},final,tracking=true,factor=1100,stretch=10,shrink=10]{microtype}
+\SetTracking{encoding={*}, shape=sc}{0}
+
+% Enlaces y colores
+
+\usepackage{hyperref}
+\usepackage{xcolor}
+\hypersetup{
+  colorlinks=true,
+  citecolor=,
+  linkcolor=,
+  urlcolor=blue,
+}
+
+% Otros elementos de página
+
+\usepackage{enumitem}
+\setlist[enumerate]{leftmargin=-\itemindent, itemsep=0pt}
+\setlist[itemize]{leftmargin=-\itemindent, itemsep=0pt}
+
+\usepackage[labelfont={sc, sf}, textfont=sf]{caption}
+
+\usepackage{booktabs}
+\renewcommand\arraystretch{1.5}
+
+% Tikz
+
+\usepackage{tikz}
+\usetikzlibrary{babel}
+\usepackage{float}
+
+% Código
+
+\usepackage{listings}
+\lstset{
+	basicstyle=\ttfamily,%
+	breaklines=true,%
+	captionpos=b,                    % sets the caption-position to bottom
+  tabsize=2,	                   % sets default tabsize to 2 spaces
+  frame=lines,
+  numbers=left,
+  stepnumber=1,
+  aboveskip=12pt,
+  showstringspaces=false,
+  keywordstyle=\bfseries,
+  commentstyle=\itshape,
+  columns=flexible,
+}
+\renewcommand{\lstlistingname}{Listado}
+
+% Ajuste del tamaño de las imágenes
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+\else\Gin@nat@width\fi}
+\makeatother
+\let\Oldincludegraphics\includegraphics
+\renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=\maxwidth]{#1}}
+
+\usepackage{float}
+\floatplacement{figure}{H}
+
+% ENTORNOS
+
+\newtheoremstyle{ejercicio-style}  % Nombre del estilo
+{2\topsep}                                  % Espacio por encima
+{1.5\topsep}                                  % Espacio por debajo
+{\itshape}                                  % Fuente del cuerpo
+{0pt}                                  % Identación
+{\scshape}                      % Fuente para la cabecera
+{.}                                 % Puntuación tras la cabecera
+{5pt plus 1pt minus 1pt}                              % Espacio tras la cabecera
+{{\thmname{#1}\thmnumber{ #2}}\thmnote{ (#3)}}  % Especificación de la cabecera
+
+\newtheoremstyle{remark-style}
+{-\topsep}                                  % Espacio por encima
+{2\topsep}                                  % Espacio por debajo
+{}                                  % Fuente del cuerpo
+{0pt}                                  % Identación
+{\itshape}
+{.}
+{5pt plus 1pt minus 1pt}                              % Espacio tras la cabecera
+{}
+
+% Ejercicios y solución
+\theoremstyle{ejercicio-style}
+\newtheorem{ejer}{Ejercicio}
+
+\theoremstyle{remark-style}
+\newtheorem*{sol}{Solución}
+
+
+% Márgenes
+\usepackage[bottom=3.125cm, top=2.5cm, left=3.5cm, right=3.5cm, marginparwidth=70pt]{geometry}
+
+%-------------------------------------------------------------------------------
+%	TÍTULO
+%-------------------------------------------------------------------------------
+
+%dealing with (sub/subsub)sections
+%\let\raggedsection\centering%Center all sectioningheads
+%all levels have something in common, let's save typing:
+\RedeclareSectionCommands[beforeskip=-3ex,
+afterskip=2ex]{section,subsection,subsubsection}
+\addtokomafont{section}{\normalfont\large\textsc}
+\RedeclareSectionCommand[beforeskip=-6ex]{section}
+\addtokomafont{subsection}{\normalfont\itshape}
+
+%-------------------------------------------------------------------------------
+%	CONTENIDO
+%-------------------------------------------------------------------------------
+
+\begin{document}
+
+\begin{flushright}
+  $if(author)$$author$$endif$\vspace{.5em}
+
+  \textit{$if(subject)$$subject$$endif$}
+
+  $if(degree)$$degree$$endif$
+
+  \textsc{$if(university)$$university$$endif$}\vspace{.5em}
+
+  \today\vspace{.5em}
+\end{flushright}
+
+\begin{flushleft}
+  $if(title)$
+  \title{$title$$if(thanks)$\thanks{$thanks$}$endif$}
+  $endif$
+\end{flushleft}
+
+$body$
+
+$for(include-after)$
+
+$include-after$
+
+$endfor$
+
+\end{document}
