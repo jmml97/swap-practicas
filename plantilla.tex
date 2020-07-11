@@ -25,7 +25,10 @@
 % Fuentes personalizadas para utilizar con XeLaTeX o LuaLaTeX
 
 \usepackage[no-math]{fontspec}
-\setmainfont[WordSpace=1.3, RawFeature={+ss06}  ]{EBGaramond}
+\setmainfont[%
+Contextuals=Alternate,
+SmallCapsFeatures={LetterSpace=3}]%
+{Adobe Garamond Pro}
 \setsansfont[Scale=0.9]{Alegreya Sans}
 \setmonofont[Scale=0.75]{Vera Mono}
 
@@ -130,6 +133,13 @@
 % Márgenes
 \usepackage[bottom=3.125cm, top=2.5cm, left=3.5cm, right=3.5cm, marginparwidth=70pt]{geometry}
 
+
+% Movidas de Pandoc
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+\usepackage{longtable}
+
 %-------------------------------------------------------------------------------
 %	TÍTULO
 %-------------------------------------------------------------------------------
@@ -163,7 +173,7 @@ afterskip=2ex]{section,subsection,subsubsection}
 
 \begin{flushleft}
   $if(title)$
-  \title{$title$$if(thanks)$\thanks{$thanks$}$endif$}
+  \scshape\Large $title$$if(thanks)$\thanks{$thanks$}$endif$
   $endif$
 \end{flushleft}
 
